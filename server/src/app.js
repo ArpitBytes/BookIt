@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const routes = require('./routes');
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -14,10 +16,8 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-// ─── Health Check ───────────────────────────────────────────
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
-});
+// ─── API Routes ─────────────────────────────────────────────
+app.use('/api', routes);
 
 // ─── 404 Handler ────────────────────────────────────────────
 app.use((req, res) => {
@@ -28,5 +28,8 @@ app.use((req, res) => {
     },
   });
 });
+
+// ─── Error Handler ──────────────────────────────────────────
+app.use(errorHandler);
 
 module.exports = app;
