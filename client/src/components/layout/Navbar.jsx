@@ -1,10 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import './Navbar.css';
 
 export default function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -20,17 +21,17 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-links">
-          <Link to="/" className="nav-link">Events</Link>
+          <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>Events</Link>
 
           {isAuthenticated ? (
             <>
               {user.role === 'USER' && (
-                <Link to="/bookings" className="nav-link">My Bookings</Link>
+                <Link to="/bookings" className={`nav-link ${location.pathname === '/bookings' ? 'active' : ''}`}>My Bookings</Link>
               )}
               {user.role === 'ORGANIZER' && (
                 <>
-                  <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                  <Link to="/dashboard/analytics" className="nav-link">Analytics</Link>
+                  <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>Dashboard</Link>
+                  <Link to="/dashboard/analytics" className={`nav-link ${location.pathname === '/dashboard/analytics' ? 'active' : ''}`}>Analytics</Link>
                 </>
               )}
               <div className="nav-user">
