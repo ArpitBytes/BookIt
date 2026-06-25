@@ -1,5 +1,4 @@
 const eventService = require('../services/event.service');
-const prisma = require('../utils/prisma');
 
 async function getEvents(req, res, next) {
   try {
@@ -18,23 +17,8 @@ async function getEvents(req, res, next) {
 
 async function getEventById(req, res, next) {
   try {
-    const event = await eventService.getEventById(req.params.id);
-
-    // Log EVENT_VIEWED for authenticated users (fire-and-forget)
-    if (req.user) {
-      prisma.activityLog
-        .create({
-          data: {
-            userId: req.user.id,
-            eventId: event.id,
-            action: 'EVENT_VIEWED',
-          },
-        })
-        .catch(() => {
-          // Silently ignore logging failures
-        });
-    }
-
+    const userId = req.user?.id || null;
+    const event = await eventService.getEventById(req.params.id, userId);
     res.status(200).json({ event });
   } catch (error) {
     next(error);

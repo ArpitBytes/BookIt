@@ -58,9 +58,10 @@ async function getEvents({ search, date, page = 1, limit = 10 }) {
 }
 
 /**
- * Get a single event by ID
+ * Get a single event by ID.
+ * Optionally logs an EVENT_VIEWED activity for authenticated users.
  */
-async function getEventById(eventId) {
+async function getEventById(eventId, userId = null) {
   const event = await prisma.event.findUnique({
     where: { id: eventId },
     select: {
@@ -83,6 +84,19 @@ async function getEventById(eventId) {
 
   if (!event) {
     throw new ApiError(404, 'Event not found');
+  }
+
+  // Track view for logged-in users (fire-and-forget, non-blocking)
+  if (userId) {
+    prisma.activityLog
+      .create({
+        data: {
+          userId,
+          eventId: event.id,
+          action: 'EVENT_VIEWED',
+        },
+      })
+      .catch(() => {});
   }
 
   return event;
