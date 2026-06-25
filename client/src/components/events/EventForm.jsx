@@ -13,6 +13,7 @@ export default function EventForm({ initialData, onSubmit, loading, isEdit }) {
   });
   const [errors, setErrors] = useState({});
 
+  // Resolve edit mode data pre-fill issue
   useEffect(() => {
     if (initialData) {
       setForm({

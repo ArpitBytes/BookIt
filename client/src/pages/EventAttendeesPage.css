@@ -1,0 +1,42 @@
+.attendees-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.attendees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendees-table th {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid var(--border);
+}
+
+.attendees-table td {
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.attendees-table tr:last-child td {
+  border-bottom: none;
+}
+
+.attendees-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.attendee-name {
+  font-weight: 600;
+  color: var(--text-primary) !important;
+}
