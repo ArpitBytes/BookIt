@@ -4,10 +4,12 @@ const router = express.Router();
 const authRoutes = require('./auth.routes');
 const eventRoutes = require('./event.routes');
 const bookingRoutes = require('./booking.routes');
+const dashboardRoutes = require('./dashboard.routes');
 
 router.use('/auth', authRoutes);
 router.use('/events', eventRoutes);
 router.use('/bookings', bookingRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 // Health check
 router.get('/health', (req, res) => {
