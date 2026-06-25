@@ -139,3 +139,9 @@
   color: #f87171;
   font-weight: 600;
 }
+
+.seats-sold-out {
+  color: #ef4444;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}

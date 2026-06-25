@@ -42,8 +42,8 @@ export default function EventCard({ event }) {
             style={{ width: `${seatPercentage}%` }}
           />
         </div>
-        <span className={`seats-text ${seatsLeft <= 5 ? 'seats-low' : ''}`}>
-          {isPast ? 'Event ended' : `${seatsLeft} / ${totalSeats} seats left`}
+        <span className={`seats-text ${seatsLeft <= 5 ? 'seats-low' : ''} ${seatsLeft === 0 ? 'seats-sold-out' : ''}`}>
+          {isPast ? 'Event ended' : seatsLeft === 0 ? '🚫 Sold Out' : `${seatsLeft} / ${totalSeats} seats left`}
         </span>
       </div>
     </Link>
