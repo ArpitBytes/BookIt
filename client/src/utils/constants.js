@@ -1,0 +1,18 @@
+export const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+
+export const ROLES = {
+  USER: 'USER',
+  ORGANIZER: 'ORGANIZER',
+};
+
+export const BOOKING_STATUS = {
+  CONFIRMED: 'CONFIRMED',
+  CANCELLED: 'CANCELLED',
+};
+
+export const ACTIVITY_ACTIONS = {
+  EVENT_VIEWED: 'EVENT_VIEWED',
+  BOOKING_STARTED: 'BOOKING_STARTED',
+  BOOKING_CONFIRMED: 'BOOKING_CONFIRMED',
+  BOOKING_CANCELLED: 'BOOKING_CANCELLED',
+};
